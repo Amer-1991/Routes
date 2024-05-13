@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Offers</title>
+</head>
+<body>
+    <h1>Review Offers for Your Requests</h1>
+    <% if (offers.length > 0) { %>
+        <ul>
+            <% offers.forEach(function(offer) { %>
+                <li>
+                    Amount Offered: <%= offer.amountOffered %>, Terms: <%= offer.terms %>, Bank: <%= offer.bankDetails.name %>
+                    <form action="/fundraiser/respond-offer/<%= offer._id %>" method="post">
+                        <button name="response" value="accept">Accept</button>
+                        <button name="response" value="reject">Reject</button>
+                        <input type="text" name="reason" placeholder="Optional reason for rejection">
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No offers yet.</p>
+    <% } %>
+</body>
+</html>

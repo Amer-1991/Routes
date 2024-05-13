@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Funding Requests</title>
+</head>
+<body>
+    <h1>All Funding Requests</h1>
+    <ul>
+        <% requests.forEach(function(request) { %>
+            <li><%= request.purpose %> - $<%= request.amount %></li>
+        <% }) %>
+    </ul>
+</body>
+</html>

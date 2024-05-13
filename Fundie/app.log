@@ -1,0 +1,35 @@
+Failed to start the server: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/router/route.js:216:15)
+    at app.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/application.js:499:19)
+    at Object.<anonymous> (/Users/dinar/gpt-pilot/workspace/Fundie/src/app.js:41:7)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Failed to start the server: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/router/route.js:216:15)
+    at app.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/application.js:499:19)
+    at Object.<anonymous> (/Users/dinar/gpt-pilot/workspace/Fundie/src/app.js:41:7)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Failed to start the server: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/router/route.js:216:15)
+    at app.<computed> [as get] (/Users/dinar/gpt-pilot/workspace/Fundie/node_modules/express/lib/application.js:499:19)
+    at Object.<anonymous> (/Users/dinar/gpt-pilot/workspace/Fundie/src/app.js:41:7)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Server running on port 8080
+Server running on port 8080

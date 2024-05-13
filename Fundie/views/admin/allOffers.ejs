@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Offers</title>
+</head>
+<body>
+    <h1>All Offers</h1>
+    <ul>
+        <% offers.forEach(function(offer) { %>
+            <li>Offered: $<%= offer.amountOffered %> by <%= offer.bankDetails.name %></li>
+        <% }) %>
+    </ul>
+</body>
+</html>

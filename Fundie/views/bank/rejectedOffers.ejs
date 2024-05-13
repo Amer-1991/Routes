@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejected Offers</title>
+</head>
+<body>
+    <h1>Rejected Offers</h1>
+    <% if (offers.length > 0) { %>
+        <ul>
+            <% offers.forEach(function(offer) { %>
+                <li>
+                    Request ID: <%= offer.fundingRequestId %>, Amount Offered: <%= offer.amountOffered %>, Terms: <%= offer.terms %>
+                    <form action="/bank/update-offer/<%= offer._id %>" method="post">
+                        <input type="number" name="amountOffered" value="<%= offer.amountOffered %>" required>
+                        <input type="text" name="terms" value="<%= offer.terms %>" required>
+                        <button type="submit">Update Offer</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No rejected offers found.</p>
+    <% } %>
+</body>
+</html>
