@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./db');
 const User = require('./models/userModel');
-const { fetchAllUsers } = require('./controllers/userController');
+const { fetchAllUsers, showRequestFundForm } = require('./controllers/userController');
 const session = require('express-session');
 const flash = require('connect-flash');
 const authRoutes = require('./routes/authRoutes');
@@ -27,12 +27,20 @@ try {
   app.use(session({
     secret: process.env.SESSION_SECRET || 'default_secret', // INPUT_REQUIRED {Please ensure SESSION_SECRET is set in your .env file}
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+    saveUninitialized: false, // Changed to false to prevent session being saved without modification
+    cookie: { secure: process.env.NODE_ENV === 'production', httpOnly: true }
   }));
 
   app.use(flash());
-  app.use(ensureAuthenticated);
+
+  app.use((req, res, next) => {
+    if (req.session && req.session.userId) {
+      return next();
+    } else {
+      console.log('User is not authenticated, redirecting to login');
+      res.redirect('/auth/login');
+    }
+  });
 
   app.get('/', (req, res) => {
     if (req.session.userId) {
@@ -42,12 +50,13 @@ try {
     }
   });
 
-  // Ensure fetchAllUsers is properly defined and exported in userController.js and correctly imported and used here
   if (typeof fetchAllUsers !== 'function') {
     console.error('fetchAllUsers is not a function, please check the export/import.');
     process.exit(1);
   }
   app.get('/api/users', fetchAllUsers);
+
+  app.get('/fundraiser/request-fund', showRequestFundForm);
 
   app.get('/health', (req, res) => {
     res.send('API is running');

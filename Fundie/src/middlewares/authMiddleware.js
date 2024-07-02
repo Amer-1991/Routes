@@ -6,7 +6,7 @@ exports.ensureAuthenticated = (req, res, next) => {
         console.log('User is authenticated');
         return next();
     } else {
-        console.log('User is not authenticated');
+        console.log('User is not authenticated, redirecting to login');
         res.redirect('/login');
     }
 };
@@ -17,7 +17,7 @@ exports.checkRole = (roles) => (req, res, next) => {
         console.log(`User role is authorized: ${req.session.role}`);
         return next();
     } else {
-        console.error(`Unauthorized access attempt by role: ${req.session.role}`);
+        console.error(`Unauthorized access attempt by role: ${req.session.role}, error: Access Denied`);
         res.status(403).send('Access Denied: You do not have permission to perform this action.');
     }
 };

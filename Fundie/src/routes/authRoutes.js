@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const User = require('../models/userModel');
 const { Request, Response } = require('express');
+const sessionManagement = require('../utils/sessionManagement'); // Import session management utility
 
 const router = express.Router();
 
@@ -33,7 +34,8 @@ router.post('/register', [
     });
 
     await user.save();
-    console.log('User registered successfully:', username);
+    sessionManagement.initializeUserSession(req, user); // Use the session management utility
+    console.log('User registered successfully with session:', username);
     res.status(201).send('User registered');
   } catch (error) {
     console.error('Error during user registration:', error.message, error.stack, error);
@@ -66,13 +68,28 @@ router.post('/login', [
       return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
     }
 
-    req.session.userId = user._id.toString(); // Store user ID in session
-    req.session.role = user.role; // Store user role in session
-    req.session.user = { username: user.username, role: user.role }; // Store user details in session
-    console.log('User logged in successfully:', username);
-    res.send('User logged in');
+    if (req.session) {
+      req.session.userId = user._id.toString(); // Store user ID in session
+      req.session.role = user.role; // Store user role in session
+      console.log('Session variables set successfully:', `UserID: ${req.session.userId}, Role: ${req.session.role}`);
+      res.send('User logged in');
+    } else {
+      console.error('Session not initialized');
+      return res.status(500).send('Failed to initialize session');
+    }
   } catch (error) {
     console.error('Error during user login:', error.message, error.stack, error);
+    res.status(500).send('Server error');
+  }
+});
+
+// GET route for login page
+router.get('/login', (req, res) => {
+  try {
+    res.render('login'); // Render the login view
+    console.log('Rendering login page');
+  } catch (error) {
+    console.error('Error rendering login page:', error.message, error.stack);
     res.status(500).send('Server error');
   }
 });

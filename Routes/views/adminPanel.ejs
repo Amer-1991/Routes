@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<body>
+<%- include('partials/_header.ejs') %>
+<div class="container mt-4">
+    <h1>Admin Panel</h1>
+    <button id="testScrapeButton" class="btn btn-primary">Test Scrape</button>
+    <form id="updateUrlsForm" method="POST" action="/admin/update-urls">
+        <div class="mb-3">
+            <label for="scrapingUrls" class="form-label">Scraping URLs (comma-separated):</label>
+            <textarea class="form-control" id="scrapingUrls" name="scrapingUrls" rows="3"><%= process.env.SCRAPING_URLS %></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Update URLs</button>
+    </form>
+    <form id="otpForm" method="POST" action="/admin/otp-submit">
+        <div class="mb-3">
+            <label for="otp" class="form-label">Enter OTP for Lendo:</label>
+            <input type="text" class="form-control" id="otp" name="otp" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit OTP</button>
+    </form>
+</div>
+<%- include('partials/_footer.ejs') %>
+<script src="/js/adminScrape.js"></script>
+</body>
+</html>

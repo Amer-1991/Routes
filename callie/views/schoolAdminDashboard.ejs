@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<body>
+<%- include('partials/_header.ejs') %>
+  <main role="main" class="container mt-4">
+    <h1>School Admin Dashboard</h1>
+    <p>Welcome to your dashboard, <%= session.fullName %>!</p>
+    <form action="/school-admin/uploadStudentGuardianData" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="csvFile" class="form-label">Upload CSV File</label>
+        <input class="form-control" type="file" id="csvFile" name="csvFile" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </main>
+<%- include('partials/_footer.ejs') %>
+</body>
+</html>

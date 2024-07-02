@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+  <body>
+<%- include('partials/_header.ejs') %>
+    <main role="main" class="container mt-4">
+      <div class="text-center">
+        <h1>Routes</h1>
+        <form id="filterForm">
+          <div class="form-group">
+            <label for="durationFilter">Duration:</label>
+            <input type="text" id="durationFilter" name="duration" class="form-control">
+            <span class="error-message" style="color:red;"></span>
+          </div>
+          <div class="form-group">
+            <label for="nameFilter">Name:</label>
+            <input type="text" id="nameFilter" name="name" class="form-control">
+            <span class="error-message" style="color:red;"></span>
+          </div>
+          <div class="form-group">
+            <label for="providerFilter">Provider:</label>
+            <input type="text" id="providerFilter" name="provider" class="form-control">
+            <span class="error-message" style="color:red;"></span>
+          </div>
+          <div class="form-group">
+            <label for="statusFilter">Status:</label>
+            <input type="text" id="statusFilter" name="status" class="form-control">
+            <span class="error-message" style="color:red;"></span>
+          </div>
+          <div class="form-group">
+            <label for="typeFilter">Type:</label>
+            <input type="text" id="typeFilter" name="type" class="form-control">
+            <span class="error-message" style="color:red;"></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Duration</th>
+              <th>Name</th>
+              <th>Provider</th>
+              <th>Minimum Amount per Share</th>
+              <th>Time to Open</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Target Amount</th>
+              <th>ROI (%)</th>
+              <th>APR (%)</th>
+              <th>Website Source</th>
+              <th>Website ID</th>
+              <th>Unique Investment Identifier</th>
+              <th>New Investment Term</th>
+            </tr>
+          </thead>
+          <tbody id="opportunitiesBody">
+            <!-- Data will be populated here by displayOpportunities.js -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+<%- include('partials/_footer.ejs') %>
+  <script src="/js/displayOpportunities.js"></script>
+  <script src="/js/filterOpportunities.js"></script>
+</html>

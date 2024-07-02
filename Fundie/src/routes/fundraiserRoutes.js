@@ -45,7 +45,13 @@ router.get('/my-requests', async (req, res) => {
 // Route to view offers for the fundraiser's requests
 router.get('/view-offers', async (req, res) => {
   try {
-    const myOffers = await Offer.find({ 'fundingRequestId': { $in: (await Fundraiser.find({ createdBy: req.session.userId })).map(fr => fr._id) } }).populate('fundingRequestId');
+    const fundraisers = await Fundraiser.find({ createdBy: req.session.userId });
+    if (fundraisers.length === 0) {
+      console.log('No fundraisers found for user:', req.session.userId);
+      res.status(404).json({ message: 'No fundraisers found' });
+      return;
+    }
+    const myOffers = await Offer.find({ 'fundingRequestId': { $in: fundraisers.map(fr => fr._id) } }).populate('fundingRequestId');
     console.log('Offers fetched successfully for user:', req.session.userId);
     res.render('reviewOffers', { offers: myOffers });
   } catch (error) {

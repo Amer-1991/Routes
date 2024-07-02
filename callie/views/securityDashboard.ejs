@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+  <h1>Security Dashboard</h1>
+  <p>Welcome to your dashboard, <%= session.fullName %>!</p>
+  <div id="statusLists">
+    <div class="list-group">
+      <h3>Ready to Pick Up</h3>
+      <div id="readyList" class="list">
+        <% if (students) { %>
+          <% students.forEach(function(student) { %>
+            <% if (student.status === 'Ready to Pick Up') { %>
+              <div id="status-<%= student._id %>"><%= student.fullName %> - <%= student.status %></div>
+              <button data-student-id="<%= student._id %>" data-status="Student Called">Call Student</button>
+              <button data-student-id="<%= student._id %>" data-status="Late">Mark Late</button>
+            <% } %>
+          <% }); %>
+        <% } else { %>
+          <p>No students data available.</p>
+        <% } %>
+      </div>
+    </div>
+    <div class="list-group">
+      <h3>Student Called</h3>
+      <div id="calledList" class="list">
+        <% if (students) { %>
+          <% students.forEach(function(student) { %>
+            <% if (student.status === 'Student Called') { %>
+              <div id="status-<%= student._id %>"><%= student.fullName %> - <%= student.status %></div>
+              <button data-student-id="<%= student._id %>" data-status="Ready to Pick Up">Mark Ready</button>
+              <button data-student-id="<%= student._id %>" data-status="Late">Mark Late</button>
+            <% } %>
+          <% }); %>
+        <% } else { %>
+          <p>No students data available.</p>
+        <% } %>
+      </div>
+    </div>
+    <div class="list-group">
+      <h3>Late</h3>
+      <div id="lateList" class="list">
+        <% if (students) { %>
+          <% students.forEach(function(student) { %>
+            <% if (student.status === 'Late') { %>
+              <div id="status-<%= student._id %>"><%= student.fullName %> - <%= student.status %></div>
+              <button data-student-id="<%= student._id %>" data-status="Ready to Pick Up">Mark Ready</button>
+              <button data-student-id="<%= student._id %>" data-status="Student Called">Call Student</button>
+            <% } %>
+          <% }); %>
+        <% } else { %>
+          <p>No students data available.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('partials/_footer.ejs') %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/securityDashboard.js"></script>
+</body>
+</html>

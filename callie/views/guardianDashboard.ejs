@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/api/students')
+    .then(response => response.json())
+    .then(data => {
+      const studentsList = document.getElementById('studentsList');
+      if (data.length === 0) {
+        const noDataItem = document.createElement('li');
+        noDataItem.textContent = 'No students assigned to you.';
+        studentsList.appendChild(noDataItem);
+      } else {
+        data.forEach(student => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${student.fullName} - Status: ${student.status}`;
+          studentsList.appendChild(listItem);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error loading students:', error.message, error.stack);
+      const studentsList = document.getElementById('studentsList');
+      const errorItem = document.createElement('li');
+      errorItem.textContent = 'Failed to load student data. Please try again later.';
+      studentsList.appendChild(errorItem);
+    });
+});
+</script>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+  <h1>Guardian Dashboard</h1>
+  <p>Welcome to your dashboard, <%= session.fullName %>!</p>
+  <ul id="studentsList"></ul>
+</main>
+<%- include('partials/_footer.ejs') %>
+</body>
+</html>

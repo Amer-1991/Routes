@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+    <div class="text-center">
+        <h1>stock</h1>
+        <form id="stockForm" class="form-inline justify-content-center mt-4">
+            <div class="form-group mb-2">
+                <input type="text" class="form-control" id="stockSymbol" name="stockSymbol" placeholder="Enter Stock Symbol" required>
+            </div>
+            <select id="predictionMethod" class="form-control mb-2 ml-2" name="predictionMethod" required>
+                <option value="">Select Prediction Method</option>
+                <option value="movingAverage">Moving Average</option>
+                <option value="exponentialSmoothing">Exponential Smoothing</option>
+                <option value="externalMethod">External Method</option> <!-- Added new prediction method option -->
+            </select>
+            <input type="date" class="form-control mb-2 ml-2" id="startDate" name="startDate" required>
+            <input type="date" class="form-control mb-2 ml-2" id="endDate" name="endDate" required>
+            <button type="submit" class="btn btn-primary mb-2 ml-2">Predict</button>
+            <button type="button" class="btn btn-secondary mb-2 ml-2" id="compareButton">Compare with Real-time Price</button>
+        </form>
+        <div id="predictionResults" class="mt-4"></div>
+    </div>
+</main>
+</body>
+<%- include('partials/_footer.ejs') %>
+<script src="/public/js/main.js"></script>
+</html>
