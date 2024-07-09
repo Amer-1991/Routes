@@ -9,6 +9,7 @@ const { spawn } = require('child_process');
 const dotenv = require('dotenv');
 const path = require('path');
 const http = require('http');
+const { globalEventEmitter } = require('../utils/globalEventEmitter'); // Assuming this is defined to handle global events
 
 // Unified route for both manual and automatic scraping
 router.route('/scrape')
@@ -60,9 +61,9 @@ router.post('/admin/otp-input', isAuthenticated, isAdmin, (req, res) => {
 });
 
 // Handling OTP submission
-router.post('/admin/otp-submit', isAuthenticated, isAdmin, (req, res) => {
+router.post('/admin/otp-submit', isAuthenticated, isAdmin, async (req, res) => {
     const { otp } = req.body;
-    const correctOtp = process.env.ADMIN_OTP; // INPUT_REQUIRED {Set the ADMIN_OTP in your .env file to the OTP you want to use for admin authentication}
+    const correctOtp = process.env.ADMIN_OTP;
 
     if (!otp || otp.trim() === '') {
         logging.log_error('OTP input is empty');
@@ -70,6 +71,9 @@ router.post('/admin/otp-submit', isAuthenticated, isAdmin, (req, res) => {
     }
 
     if (otp === correctOtp) {
+        // Emitting the OTP to the global event emitter which the Puppeteer script listens to
+        globalEventEmitter.emit('otpInput', otp);
+
         req.session.isAuthenticatedAdmin = true; // Set a flag in the session
         logging.log_info('OTP verified successfully, admin authenticated.');
         res.redirect('/admin/scrape-secure'); // Redirect to the new secure scraping route

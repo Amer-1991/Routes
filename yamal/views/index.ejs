@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+  <body>
+<%- include('partials/_header.ejs') %>
+    <main role="main" class="container mt-4">
+      <div class="text-center">
+        <h1>Investment Opportunities</h1>
+        <% if (opportunities.length > 0) { %>
+          <div class="list-group">
+            <% opportunities.forEach(opportunity => { %>
+              <a href="<%= opportunity.url %>" class="list-group-item list-group-item-action">
+                <h5 class="mb-1"><%= opportunity.name %></h5>
+                <p class="mb-1">Yearly Investment Percentage: <%= opportunity.yearlyInvestmentPercentage %></p>
+                <p class="mb-1">Investment Amount: <%= opportunity.amount %></p>
+                <small>Start Date: <%= opportunity.startDate %></small>
+              </a>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <p>No opportunities available at this time.</p>
+        <% } %>
+      </div>
+    </main>
+  </body>
+<%- include('partials/_footer.ejs') %>
+  <script src="/js/main.js"></script>
+</html>
